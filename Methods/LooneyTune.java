@@ -27,7 +27,7 @@ public class LooneyTune {
         if (dotindex != -1) {
             return fullname.substring(0, dotindex);
         } else {
-            return "Your character does not have a valid nickname.";
+            return fullname;
         }
 
     }
