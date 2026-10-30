@@ -1,13 +1,13 @@
 public class LooneyTune {
 
-    private String name;
+    private String fullname; // First Name Last Name (Bugs Bunny) or (Elmer Fudd)
     private String catchphrase;
     private int carrotsEaten;
     private double bounty;
     private boolean isDisguised;
 
-    public LooneyTune(String name, String catchphrase) {
-        this.name = name;
+    public LooneyTune(String fullname, String catchphrase) {
+        this.fullname = name;
         this.catchphrase = catchphrase;
 
         int carrotsEaten = 0;
@@ -21,20 +21,34 @@ public class LooneyTune {
     
     }
 
-    public String getNickname(String divider) {
+    public String getNickname() {
 
-        // Takes the divider ( space for example ) and checks to see if there is one
-        // Means there is a first and last name (Porky Pig for example)
-        // Will find the space / divider and take off the first part of the name (Porky) and print it
+        int dotindex = fullname.indexOf(" ");
+        if (dotindex != -1) {
+            return fullname.substring(0, dotindex);
+        } else {
+            return "Your character does not have a valid nickname.";
+        }
 
     }
+
+    public String toString() {
+
+        return fullname + " " + " (" + getNickname() + ") ";
+
+    }
+
 
     public String feedCarrots(int carrots) {
 
-        // Use index of to see if Bunny is in the name somewhere?
-        // If so, then feed carrots.
+        if (fullname.toLowerCase().contains("bunny")) {
+            carrotsEaten += carrots;
+            return toString() + " has eaten " + carrotsEaten + " carrots. " ;
+        } else {
+            return toString() + " is not a bunny. " ;
+        }
 
-    }
+    } 
 
     public boolean isHighValueTarget() {
         
