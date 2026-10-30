@@ -7,12 +7,12 @@ public class LooneyTune {
     private boolean isDisguised;
 
     public LooneyTune(String fullname, String catchphrase) {
-        this.fullname = name;
+        this.fullname = fullname;
         this.catchphrase = catchphrase;
 
-        int carrotsEaten = 0;
-        double bounty = 0.0;
-        boolean isDisguised = false;
+        carrotsEaten = 0;
+        bounty = 0.0;
+        isDisguised = false;
     }
 
     public boolean verifyCatchphrase(String checkphrase) {
@@ -32,9 +32,20 @@ public class LooneyTune {
 
     }
 
+        public String getLastName() {
+
+        int dotindex = fullname.indexOf(" ");
+        if (dotindex != -1) {
+            return fullname.substring(dotindex + 1, fullname.length());
+        } else {
+            return "Your character does not have a valid last name.";
+        }
+
+    }
+
     public String toString() {
 
-        return fullname + " " + " (" + getNickname() + ") ";
+        return fullname + " (" + getNickname() + ")";
 
     }
 
@@ -45,15 +56,38 @@ public class LooneyTune {
             carrotsEaten += carrots;
             return toString() + " has eaten " + carrotsEaten + " carrots. " ;
         } else {
-            return toString() + " is not a bunny. " ;
+            return toString() + " is not a bunny. They are a " + getLastName();
         }
 
     } 
 
+    public String addBounty(double amt) {
+        bounty += amt;
+        return toString() + " now has a bounty of " + bounty;
+    }
+
+    public String removeBounty(double amt) {
+        bounty -= amt;
+        if (bounty < 0) {
+            bounty = 0;
+        }
+        return toString() + " now has a bounty of " + bounty;
+    }
+
     public boolean isHighValueTarget() {
         
-        // No idea
+        if (bounty >= 50) {
+            isDisguised = true;
+            return true;
+        } else {
+            isDisguised = false;
+            return false;
+        }
         
+    }
+
+    public boolean isDisguised() {
+        return isDisguised;
     }
 
 }
